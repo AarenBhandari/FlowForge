@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FlowForge · Engineering Water</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js">
+    </script>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar">
+            <div class="logo">Flow<span>Forge</span></div>
+            <div class="nav-actions">
+                <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
+                <span style="font-weight:500;" id="progressBadge">🏆 0/7</span>
+            </div>
+        </nav>
+
+        <section class="hero">
+            <h1>Engineering Water: <span class="highlight">A Design Challenge</span> for Sustainable Solutions</h1>
+            <p>Learn how engineers solve real-world water conservation problems by designing, testing, and optimizing your own smart irrigation systems.</p>
+            <button class="btn-primary" id="startLearning"><i class="fas fa-rocket"></i> Start Learning</button>
+        </section>
+
+        <div class="grid-2">
+            <div class="card glass"><i class="fas fa-droplet"></i>
+                <h3>About FlowForge</h3>
+                <p>Built by high school engineering researchers, FlowForge brings real STEM challenges to students aged 14–18. Design, test, and optimize smart irrigation.</p>
+            </div>
+            <div class="card glass"><i class="fas fa-seedling"></i>
+                <h3>Why Water Matters</h3>
+                <p>With 48% water savings demonstrated in gravity-fed systems, sustainable irrigation is critical for Indonesia's future. Every drop counts.</p>
+            </div>
+        </div>
+
+        <h2 class="section-title">⚙️ Meet the Engineering Design Process</h2>
+        <div class="grid-2">
+            <div class="card"><i class="fas fa-search"></i>
+                <h3>Discover</h3>
+                <p>Identify the problem & constraints</p>
+            </div>
+            <div class="card"><i class="fas fa-pencil-ruler"></i>
+                <h3>Design</h3>
+                <p>Build & iterate your system</p>
+            </div>
+            <div class="card"><i class="fas fa-chart-line"></i>
+                <h3>Optimize</h3>
+                <p>Test, analyze, improve</p>
+            </div>
+            <div class="card"><i class="fas fa-share-alt"></i>
+                <h3>Propose</h3>
+                <p>Share your engineering solution</p>
+            </div>
+        </div>
+
+        <h2 class="section-title">🔬 Featured Research: Smart Gravity-Fed Irrigation</h2>
+        <div class="card glass" style="padding:24px;">
+            <div style="display:flex;flex-wrap:wrap;gap:20px;align-items:center;">
+                <div><i class="fas fa-tint" style="font-size:3rem;color:#1a5cff;"></i></div>
+                <div>
+                    <h3>48% Water Savings</h3>
+                    <p>Gravity-fed systems reduce energy use and increase efficiency. Optimized for Indonesian community farms.</p>
+                </div>
+                <div><i class="fas fa-chart-pie" style="font-size:2rem;"></i> <span style="font-weight:600;">+32% plant growth</span></div>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:12px;">
+                <span class="btn-outline" style="padding:4px 16px;">📐 Engineering process</span>
+                <span class="btn-outline" style="padding:4px 16px;">📊 Optimization</span>
+                <span class="btn-outline" style="padding:4px 16px;">🌱 Educational applications</span>
+            </div>
+        </div>
+
+        <h2 class="section-title">📘 Begin the Curriculum</h2>
+        <div id="moduleContainer" class="module-list"></div>
+
+        <div id="moduleDetail" class="glass" style="padding:24px;margin:24px 0;display:none;">
+            <h3 id="detailTitle">Module</h3>
+            <div id="detailContent"></div>
+        </div>
+
+        <div class="footer">
+            <p>FlowForge · STEM for Indonesia · Built with ❤️ by engineering researchers</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -181,33 +181,63 @@
     function getModule2() {
         return `
             <p><strong>Adjust sliders to optimize your system's performance:</strong></p>
-            <div class="slider-group">
+            <div class="slider-group" style="display:flex; flex-direction:column; gap:20px;">
+                
                 <div class="slider-item">
-                    <label>Reservoir Height</label>
-                    <input type="range" min="0.5" max="1.5" step="0.1" value="1.0" oninput="this.nextElementSibling.textContent = this.value + 'm'">
-                    <span>1.0m</span>
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <label style="font-weight:600;">📐 Reservoir Height (Elevation)</label>
+                        <span style="font-weight:700; color:#1a5cff;">1.0m</span>
+                    </div>
+                    <input type="range" min="0.5" max="1.5" step="0.1" value="1.0" oninput="this.previousElementSibling.querySelector('span').textContent = this.value + 'm'">
+                    <p style="font-size:0.85rem; margin-top:4px; color:#555;">
+                        <strong>💡 How it works:</strong> How high the water tank is off the ground.<br>
+                        <strong>🎯 Goal:</strong> <span style="color:#1a5cff; font-weight:600;">Aim High / Maximum</span> — Higher height creates stronger gravity pressure, so water flows down faster without pumps!
+                    </p>
                 </div>
+
                 <div class="slider-item">
-                    <label>Tubing Diameter</label>
-                    <input type="range" min="4" max="8" step="1" value="6" oninput="this.nextElementSibling.textContent = this.value + 'mm'">
-                    <span>6mm</span>
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <label style="font-weight:600;">🥤 Tubing Diameter (Pipe Width)</label>
+                        <span style="font-weight:700; color:#1a5cff;">6mm</span>
+                    </div>
+                    <input type="range" min="4" max="8" step="1" value="6" oninput="this.previousElementSibling.querySelector('span').textContent = this.value + 'mm'">
+                    <p style="font-size:0.85rem; margin-top:4px; color:#555;">
+                        <strong>💡 How it works:</strong> How wide or thick the inside of the pipe is.<br>
+                        <strong>🎯 Goal:</strong> <span style="color:#1a5cff; font-weight:600;">Aim Wide / Larger</span> — Wider pipes let water flow easily with less friction (like drinking through a wide boba straw!).
+                    </p>
                 </div>
+
                 <div class="slider-item">
-                    <label>Moisture Threshold</label>
-                    <input type="range" min="0" max="2" step="1" value="1" oninput="const v=['Low','Medium','High'];this.nextElementSibling.textContent=v[this.value]">
-                    <span>Medium</span>
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <label style="font-weight:600;">🌱 Moisture Threshold (Soil Sensor Target)</label>
+                        <span style="font-weight:700; color:#1a5cff;">Medium</span>
+                    </div>
+                    <input type="range" min="0" max="2" step="1" value="1" oninput="const v=['Low','Medium','High'];this.previousElementSibling.querySelector('span').textContent=v[this.value]">
+                    <p style="font-size:0.85rem; margin-top:4px; color:#555;">
+                        <strong>💡 How it works:</strong> How wet the soil must be before the valve turns off.<br>
+                        <strong>🎯 Goal:</strong> <span style="color:#1a5cff; font-weight:600;">Keep Balanced (Medium)</span> — Low starves the plants; High wastes water and floods roots.
+                    </p>
                 </div>
+
                 <div class="slider-item">
-                    <label>Tank Size</label>
-                    <input type="range" min="0" max="2" step="1" value="1" oninput="const v=['Small','Medium','Large'];this.nextElementSibling.textContent=v[this.value]">
-                    <span>Medium</span>
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <label style="font-weight:600;">🚰 Tank Size (Water Capacity)</label>
+                        <span style="font-weight:700; color:#1a5cff;">Medium</span>
+                    </div>
+                    <input type="range" min="0" max="2" step="1" value="1" oninput="const v=['Small','Medium','Large'];this.previousElementSibling.querySelector('span').textContent=v[this.value]">
+                    <p style="font-size:0.85rem; margin-top:4px; color:#555;">
+                        <strong>💡 How it works:</strong> Total water stored in the reservoir.<br>
+                        <strong>🎯 Goal:</strong> <span style="color:#1a5cff; font-weight:600;">Match Farm Size</span> — Bigger tanks store water longer during dry spells, but cost more and take up space.
+                    </p>
                 </div>
+
             </div>
-            <div style="background:rgba(26,92,255,0.05);padding:16px;border-radius:20px;">
+
+            <div style="background:rgba(26,92,255,0.05);padding:16px;border-radius:20px;margin-top:16px;">
                 <p><strong>📊 Predicted Performance:</strong></p>
-                <p>Water Efficiency: <span style="color:#1a5cff;font-weight:700;">82%</span></p>
-                <p>Flow Rate: <span style="color:#1a5cff;font-weight:700;">2.4 L/min</span></p>
-                <p>Pressure: <span style="color:#1a5cff;font-weight:700;">1.8 bar</span></p>
+                <p>💧 Water Efficiency: <span style="color:#1a5cff;font-weight:700;">82%</span> <small style="color:#666;">(Percentage of water actually used by plants vs wasted)</small></p>
+                <p>⚡ Flow Rate: <span style="color:#1a5cff;font-weight:700;">2.4 L/min</span> <small style="color:#666;">(How much water reaches crops per minute)</small></p>
+                <p>⏲️ Pressure: <span style="color:#1a5cff;font-weight:700;">1.8 bar</span> <small style="color:#666;">(Water force created by gravity pushing down)</small></p>
             </div>
         `;
     }
@@ -402,9 +432,7 @@
                                     datasets: [{
                                         label: 'Performance Metrics',
                                         data: [48, 32, 94, 88],
-                                        backgroundColor: ['#1a5cff', '#4d8aff', '#7aadff',
-                                            '#b0c8f0'
-                                        ],
+                                        backgroundColor: ['#1a5cff', '#4d8aff', '#7aadff', '#b0c8f0'],
                                         borderRadius: 8
                                     }]
                                 },

@@ -109,6 +109,37 @@
             btn.style.marginTop = '20px';
             btn.innerHTML = '✅ Mark as complete';
             btn.addEventListener('click', function() {
+                
+                // Helper function to count words
+                const countWords = (str) => {
+                    return (str || '').trim().split(/\s+/).filter(w => w.length > 0).length;
+                };
+
+                // VALIDATION: Module 1 (index 0)
+                if (idx === 0) {
+                    const q1 = document.getElementById('mod0_q1')?.value || '';
+                    const q2 = document.getElementById('mod0_q2')?.value || '';
+                    
+                    if (countWords(q1) < 10 || countWords(q2) < 10) {
+                        alert('⚠️ Please write at least 10 words for each reflection question to explain your thinking!');
+                        return; // Stops the function here so progress isn't saved
+                    }
+                }
+
+                // VALIDATION: Module 7 (index 6)
+                if (idx === 6) {
+                    const p1 = document.getElementById('proposal1')?.value || '';
+                    const p2 = document.getElementById('proposal2')?.value || '';
+                    const p3 = document.getElementById('proposal3')?.value || '';
+                    const p4 = document.getElementById('proposal4')?.value || '';
+                    const p5 = document.getElementById('proposal5')?.value || '';
+
+                    if (countWords(p1) < 10 || countWords(p2) < 10 || countWords(p3) < 10 || countWords(p4) < 10 || countWords(p5) < 10) {
+                        alert('⚠️ Please write at least 10 words for every proposal section to complete your engineering pitch!');
+                        return; // Stops the function here so progress isn't saved
+                    }
+                }
+
                 progress[idx] = true;
                 saveProgress();
                 launchConfetti();
@@ -144,12 +175,15 @@
                 <p>💧 Available water: 200L/day · 💰 Budget: $150 · 📏 Land: 50m²</p>
                 <p>⚙️ Constraints: Low water pressure, limited electricity</p>
             </div>
-            <p><strong>Reflection questions:</strong></p>
+            <p><strong>Reflection questions (Min. 10 words each):</strong></p>
             <div style="margin:12px 0;">
                 <p>1. What is the most critical constraint in this scenario?</p>
-                <input type="text" placeholder="Your answer..." style="width:100%;padding:10px;border-radius:20px;border:1px solid #ccc;margin:8px 0;">
+                <input type="text" id="mod0_q1" placeholder="Your answer..." style="width:100%;padding:10px;border-radius:20px;border:1px solid #ccc;margin:8px 0;">
+                <p style="font-size: 0.85rem; color: #666; margin-bottom: 16px;">💡 <em>Hint: Look at the stats above. What limits your design the most? Is it the strict budget, the lack of power, or the total water available?</em></p>
+
                 <p>2. How would you prioritize water usage?</p>
-                <input type="text" placeholder="Your answer..." style="width:100%;padding:10px;border-radius:20px;border:1px solid #ccc;margin:8px 0;">
+                <input type="text" id="mod0_q2" placeholder="Your answer..." style="width:100%;padding:10px;border-radius:20px;border:1px solid #ccc;margin:8px 0;">
+                <p style="font-size: 0.85rem; color: #666; margin-bottom: 12px;">💡 <em>Hint: If you don't have enough water for everything, how do you decide which plants get watered first? Think about survival, food value, or time of day.</em></p>
             </div>
         `;
     }
@@ -182,7 +216,6 @@
         return `
             <p><strong>Adjust sliders to optimize your system's performance:</strong></p>
             <div class="slider-group" style="display:flex; flex-direction:column; gap:20px;">
-                
                 <div class="slider-item">
                     <div style="display:flex; justify-content:space-between; align-items:center;">
                         <label style="font-weight:600;">📐 Reservoir Height (Elevation)</label>
@@ -194,7 +227,6 @@
                         <strong>🎯 Goal:</strong> <span style="color:#1a5cff; font-weight:600;">Aim High / Maximum</span> — Higher height creates stronger gravity pressure, so water flows down faster without pumps!
                     </p>
                 </div>
-
                 <div class="slider-item">
                     <div style="display:flex; justify-content:space-between; align-items:center;">
                         <label style="font-weight:600;">🥤 Tubing Diameter (Pipe Width)</label>
@@ -206,7 +238,6 @@
                         <strong>🎯 Goal:</strong> <span style="color:#1a5cff; font-weight:600;">Aim Wide / Larger</span> — Wider pipes let water flow easily with less friction (like drinking through a wide boba straw!).
                     </p>
                 </div>
-
                 <div class="slider-item">
                     <div style="display:flex; justify-content:space-between; align-items:center;">
                         <label style="font-weight:600;">🌱 Moisture Threshold (Soil Sensor Target)</label>
@@ -218,7 +249,6 @@
                         <strong>🎯 Goal:</strong> <span style="color:#1a5cff; font-weight:600;">Keep Balanced (Medium)</span> — Low starves the plants; High wastes water and floods roots.
                     </p>
                 </div>
-
                 <div class="slider-item">
                     <div style="display:flex; justify-content:space-between; align-items:center;">
                         <label style="font-weight:600;">🚰 Tank Size (Water Capacity)</label>
@@ -230,9 +260,7 @@
                         <strong>🎯 Goal:</strong> <span style="color:#1a5cff; font-weight:600;">Match Farm Size</span> — Bigger tanks store water longer during dry spells, but cost more and take up space.
                     </p>
                 </div>
-
             </div>
-
             <div style="background:rgba(26,92,255,0.05);padding:16px;border-radius:20px;margin-top:16px;">
                 <p><strong>📊 Predicted Performance:</strong></p>
                 <p>💧 Water Efficiency: <span style="color:#1a5cff;font-weight:700;">82%</span> <small style="color:#666;">(Percentage of water actually used by plants vs wasted)</small></p>
@@ -312,17 +340,29 @@
     function getModule6() {
         return `
             <div class="proposal-form">
+                <p><strong>Final Proposal (Min. 10 words per section):</strong></p>
+                
                 <label>📝 What water problem did you identify?</label>
-                <input type="text" placeholder="e.g., water scarcity in community farm during dry season" id="proposal1">
+                <input type="text" placeholder="e.g., water scarcity in community farm during dry season..." id="proposal1">
+                <p style="font-size: 0.85rem; color: #666; margin-bottom: 16px; margin-top: -8px;">💡 <em>Hint: Be specific about the location, the people affected, and their main challenge.</em></p>
+                
                 <label>🌍 Why does it matter?</label>
                 <textarea placeholder="Explain the environmental, social, or economic impact..." id="proposal2"></textarea>
+                <p style="font-size: 0.85rem; color: #666; margin-bottom: 16px; margin-top: -8px;">💡 <em>Hint: What happens to the community's health, food supply, or environment if this isn't solved?</em></p>
+
                 <label>🔧 Describe your engineering solution.</label>
                 <textarea placeholder="Detail your gravity-fed irrigation system with sensors..." id="proposal3"></textarea>
+                <p style="font-size: 0.85rem; color: #666; margin-bottom: 16px; margin-top: -8px;">💡 <em>Hint: Explain your design choices (like pipe width and reservoir height) and how they save water.</em></p>
+
                 <label>⚖️ What trade-offs did you consider?</label>
                 <textarea placeholder="Cost vs. efficiency, maintenance vs. reliability..." id="proposal4"></textarea>
+                <p style="font-size: 0.85rem; color: #666; margin-bottom: 16px; margin-top: -8px;">💡 <em>Hint: Did you have to sacrifice high efficiency to keep the budget low? Explain a tough choice.</em></p>
+
                 <label>🚀 How would you improve it?</label>
                 <textarea placeholder="Future enhancements like solar pumping or AI monitoring..." id="proposal5"></textarea>
-                <button class="btn-primary" style="width:100%;margin-top:8px;" id="exportPDF"><i class="fas fa-file-pdf"></i> Export as PDF</button>
+                <p style="font-size: 0.85rem; color: #666; margin-bottom: 16px; margin-top: -8px;">💡 <em>Hint: If you had unlimited money and time, what advanced technology would you add?</em></p>
+
+                <button class="btn-primary" style="width:100%;margin-top:8px;" id="exportPDF"><i class="fas fa-file-pdf"></i> Export Proposal</button>
             </div>
         `;
     }
@@ -375,7 +415,7 @@
             });
         }
 
-        // Drag and Drop for Module 1
+        // Drag and Drop for Module 1 (index 1)
         document.addEventListener('dragstart', function(e) {
             if (e.target.classList.contains('part') && e.target.closest('.parts-pool')) {
                 e.dataTransfer.setData('text/plain', e.target.innerText);
@@ -415,7 +455,7 @@
             }
         });
 
-        // Run Simulation button (Module 3)
+        // Run Simulation button (Module 3 / index 3)
         document.addEventListener('click', function(e) {
             const btn = e.target.closest('#runSimBtn');
             if (btn) {
@@ -477,7 +517,7 @@
             }
         });
 
-        // Challenge buttons (Module 4)
+        // Challenge buttons (Module 4 / index 4)
         document.addEventListener('click', function(e) {
             const btn = e.target.closest('.challenge-btn');
             if (btn) {
@@ -509,7 +549,7 @@
             }
         });
 
-        // PDF Export (Module 6)
+        // PDF Export (Module 6 / index 6)
         document.addEventListener('click', function(e) {
             const btn = e.target.closest('#exportPDF');
             if (btn) {
